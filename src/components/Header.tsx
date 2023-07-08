@@ -18,7 +18,13 @@ const Header = (): JSX.Element => {
 
   return (
     <HeaderCont>
-      <img src={logo} alt="Logo img" />
+      <img
+        src={logo}
+        alt="Logo img"
+        onClick={() => {
+          location.reload;
+        }}
+      />
       <LightMode>
         <img src={sun} alt="Sun img" />
         <label>
@@ -40,6 +46,10 @@ const HeaderCont = styled.header`
   align-items: center;
   background-color: #5964e0;
   padding: 32px 24px 72px;
+
+  img {
+    cursor: pointer;
+  }
 `;
 
 const LightMode = styled.div`
