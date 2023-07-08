@@ -14,7 +14,6 @@ const Header = (): JSX.Element => {
   const handleChangeLight = (): void => {
     dispatch(setDark(!mode));
   };
-  console.log(mode);
 
   return (
     <HeaderCont>
