@@ -2,15 +2,27 @@ import styled from "styled-components";
 import logo from "../assets/desktop/logo.svg";
 import moon from "../assets/desktop/icon-moon.svg";
 import sun from "../assets/desktop/icon-sun.svg";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../features/store";
+import { setDark } from "../features/lightModeSLice";
 
 const Header = (): JSX.Element => {
+  const mode = useSelector((store: RootState) => store.lightMode.dark);
+
+  const dispatch = useDispatch();
+
+  const handleChangeLight = (): void => {
+    dispatch(setDark(!mode));
+  };
+  console.log(mode);
+
   return (
     <HeaderCont>
       <img src={logo} alt="Logo img" />
       <LightMode>
         <img src={sun} alt="Sun img" />
         <label>
-          <input type="checkbox" />
+          <input type="checkbox" onChange={handleChangeLight} />
           <span className="slider"></span>
         </label>
         <img src={moon} alt="moon img" />
