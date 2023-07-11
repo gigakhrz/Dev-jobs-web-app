@@ -1,25 +1,97 @@
 import styled from "styled-components";
-import { setDark } from "../features/lightModeSLice";
 import { RootState } from "../features/store";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
+import Search from "./Search";
 
 const Home = (): JSX.Element => {
   // lightmode state
   const mode = useSelector((store: RootState) => store.lightMode.dark);
+  const jobs = useSelector((store: RootState) => store.devJob.jobs);
+  return (
+    <HomeContainer mode={mode}>
+      <Search />
+      {jobs.map((job, index) => (
+        <Job key={index} bg={job.logoBackground} mode={mode}>
+          <div className="company">
+            <img src={job.logo} alt="company logo" />
+          </div>
 
-  const dispatch = useDispatch();
+          <div className="titleContainer">
+            <h3 className="contract">{`${job.postedAt} . ${job.contract}`}</h3>
+            <h2>{job.position}</h2>
+            <h3>{job.company}</h3>
 
-  //change lightmode state
-  const handleChangeLight = (): void => {
-    dispatch(setDark(!mode));
-  };
-
-  return <></>;
+            <h4>{job.location}</h4>
+          </div>
+        </Job>
+      ))}
+    </HomeContainer>
+  );
 };
 
 export default Home;
 
-const HomeContainer = styled.form`
+const HomeContainer = styled.form<{ mode: boolean }>`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   width: 100%;
+  min-height: 100vh;
   padding: 0 24px 62px;
+  background-color: ${(props) => (props.mode ? "#121721" : "#f4f6f8")};
+  position: relative;
+  gap: 50px;
+  margin-top: 100px;
+`;
+
+const Job = styled.div<{ bg: string; mode: boolean }>`
+  width: 100%;
+  padding: 50px 32px 32px;
+  border-radius: 6px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  background: ${(props) => (props.mode ? "#19202D" : "white")};
+
+  .company {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: ${(props) => props.bg};
+    left: 32px;
+    top: -25px;
+  }
+
+  .titleContainer {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    gap: 16px;
+
+    h3 {
+      font-size: 16px;
+      font-weight: 400;
+    }
+
+    h2 {
+      color: ${(props) => (props.mode ? "white" : "#19202D")};
+      font-size: 19px;
+      font-weight: 700;
+      color: #6e8098;
+    }
+
+    h4 {
+      margin-top: 28px;
+      color: #5964e0;
+      font-size: 14px;
+      font-weight: 700;
+    }
+  }
 `;

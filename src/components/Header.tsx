@@ -1,7 +1,7 @@
 import styled from "styled-components";
-import logo from "../assets/desktop/logo.svg";
-import moon from "../assets/desktop/icon-moon.svg";
-import sun from "../assets/desktop/icon-sun.svg";
+import logo from "../../public/assets/desktop/logo.svg";
+import moon from "../../public/assets/desktop/icon-moon.svg";
+import sun from "../../public/assets/desktop/icon-sun.svg";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../features/store";
 import { setDark } from "../features/lightModeSLice";

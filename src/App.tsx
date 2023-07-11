@@ -30,7 +30,6 @@ function App() {
     } catch (error) {}
   };
 
-  console.log(jobs);
   useEffect(() => {
     fetchJobs();
   }, [page]);
@@ -55,4 +54,5 @@ const Main = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  background: #f4f6f8;
 `;
