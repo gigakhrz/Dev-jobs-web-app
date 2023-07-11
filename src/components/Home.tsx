@@ -1,12 +1,21 @@
 import styled from "styled-components";
 import { RootState } from "../features/store";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import Search from "./Search";
+import { setPage } from "../features/pageSlice";
 
 const Home = (): JSX.Element => {
   // lightmode state
   const mode = useSelector((store: RootState) => store.lightMode.dark);
   const jobs = useSelector((store: RootState) => store.devJob.jobs);
+  const page = useSelector((store: RootState) => store.page.page);
+
+  const dispatch = useDispatch();
+
+  // load more button for to fetch more data
+  const LoadMoreJob = (): void => {
+    dispatch(setPage(1));
+  };
   return (
     <HomeContainer mode={mode}>
       <Search />
@@ -25,6 +34,16 @@ const Home = (): JSX.Element => {
           </div>
         </Job>
       ))}
+
+      <button
+        className="more"
+        onClick={(e: any) => {
+          e.preventDefault();
+          LoadMoreJob();
+        }}
+      >
+        Load More
+      </button>
     </HomeContainer>
   );
 };
@@ -42,6 +61,17 @@ const HomeContainer = styled.form<{ mode: boolean }>`
   position: relative;
   gap: 50px;
   margin-top: 100px;
+
+  .more {
+    border: none;
+    border-radius: 5px;
+    background: #5964e0;
+    width: 141px;
+    height: 48px;
+    font-size: 16px;
+    font-weight: 700;
+    color: white;
+  }
 `;
 
 const Job = styled.div<{ bg: string; mode: boolean }>`
