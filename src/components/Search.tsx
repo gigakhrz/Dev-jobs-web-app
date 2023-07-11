@@ -7,14 +7,28 @@ const Search = (): JSX.Element => {
   // lightmode state
   const mode = useSelector((store: RootState) => store.lightMode.dark);
 
-  const dispatch = useDispatch();
-
-  //change lightmode state
-  const handleChangeLight = (): void => {
-    dispatch(setDark(!mode));
-  };
-
-  return <></>;
+  return (
+    <SearchContainer mode={mode}>
+      <input type="text" placeholder="Filter by title…" />
+    </SearchContainer>
+  );
 };
 
-const SearchContainer = styled.form``;
+export default Search;
+
+const SearchContainer = styled.form<{ mode: boolean }>`
+  width: 100%;
+  background-color: ${(props) => (props.mode ? "#19202D" : "white")};
+  border-radius: 6px;
+  padding: 16px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  input {
+    width: 60%;
+    color: #19202d;
+    font-size: 16px;
+    font-weight: 400;
+  }
+`;
