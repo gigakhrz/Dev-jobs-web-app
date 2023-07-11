@@ -7,6 +7,8 @@ import DevJob from "../type";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "./features/store";
 import { setJobs } from "./features/DevJobsSlice";
+import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
+import Home from "./components/Home";
 
 //Api adress
 export const API_BASE_URL = `http://localhost:3001/jobs/6/`;
@@ -33,10 +35,15 @@ function App() {
     fetchJobs();
   }, [page]);
   return (
-    <Main>
-      <GlobalStyles />
-      <Header />
-    </Main>
+    <Router>
+      <Main>
+        <GlobalStyles />
+        <Header />
+        <Routes>
+          <Route path="/" element={<Home />} />
+        </Routes>
+      </Main>
+    </Router>
   );
 }
 
