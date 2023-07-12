@@ -17,9 +17,6 @@ function App() {
   //page state
   const page = useSelector((store: RootState) => store.page.page);
 
-  // jobs state
-  const jobs = useSelector((store: RootState) => store.devJob.jobs);
-
   const dispatch = useDispatch();
 
   //fetching jobs from api

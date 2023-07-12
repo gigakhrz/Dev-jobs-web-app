@@ -8,7 +8,6 @@ const Home = (): JSX.Element => {
   // lightmode state
   const mode = useSelector((store: RootState) => store.lightMode.dark);
   const jobs = useSelector((store: RootState) => store.devJob.jobs);
-  const page = useSelector((store: RootState) => store.page.page);
 
   const dispatch = useDispatch();
 
