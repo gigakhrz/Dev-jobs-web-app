@@ -15,6 +15,7 @@ const Search = (): JSX.Element => {
   const handleSubmit = (): void => {
     dispatch(setFilters({ title: "software" }));
   };
+  //
 
   return (
     <SearchContainer mode={mode}>

@@ -3,6 +3,7 @@ import { RootState } from "../features/store";
 import { useSelector, useDispatch } from "react-redux";
 import Search from "./Search";
 import { setPage } from "../features/pageSlice";
+import { setInfo } from "../features/moreInfo";
 
 const Home = (): JSX.Element => {
   // lightmode state
@@ -15,11 +16,21 @@ const Home = (): JSX.Element => {
   const LoadMoreJob = (): void => {
     dispatch(setPage(1));
   };
+
+  const getJobId = (x: number): void => {
+    dispatch(setInfo(x));
+  };
   return (
     <HomeContainer mode={mode}>
       <Search />
       {jobs.map((job, index) => (
-        <Job key={index} bg={job.logoBackground} mode={mode}>
+        <Job
+          href="/info"
+          onClick={() => getJobId(job.id)}
+          key={index}
+          bg={job.logoBackground}
+          mode={mode}
+        >
           <div className="company">
             <img src={job.logo} alt="company logo" />
           </div>
@@ -49,7 +60,7 @@ const Home = (): JSX.Element => {
 
 export default Home;
 
-const HomeContainer = styled.form<{ mode: boolean }>`
+const HomeContainer = styled.div<{ mode: boolean }>`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -73,7 +84,7 @@ const HomeContainer = styled.form<{ mode: boolean }>`
   }
 `;
 
-const Job = styled.div<{ bg: string; mode: boolean }>`
+const Job = styled.a<{ bg: string; mode: boolean }>`
   width: 100%;
   padding: 50px 32px 32px;
   border-radius: 6px;
@@ -83,6 +94,7 @@ const Job = styled.div<{ bg: string; mode: boolean }>`
   justify-content: center;
   flex-direction: column;
   background: ${(props) => (props.mode ? "#19202D" : "white")};
+  text-decoration: none;
 
   .company {
     position: absolute;
