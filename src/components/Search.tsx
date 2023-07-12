@@ -1,13 +1,20 @@
 import styled from "styled-components";
 import { RootState } from "../features/store";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { setFilters } from "../features/DevJobsSlice";
 
 const Search = (): JSX.Element => {
   // lightmode state
   const mode = useSelector((store: RootState) => store.lightMode.dark);
+
+  //   ჩასააასწორებელიააა////
   const filters = useSelector((store: RootState) => store.devJob.filters);
 
-  console.log(filters);
+  const dispatch = useDispatch();
+
+  const handleSubmit = (): void => {
+    dispatch(setFilters({ title: "software" }));
+  };
 
   return (
     <SearchContainer mode={mode}>
