@@ -9,6 +9,7 @@ import { RootState } from "./features/store";
 import { setJobs } from "./features/DevJobsSlice";
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import Home from "./components/Home";
+import JobInfo from "./components/JobInfo";
 
 //Api adress
 export const API_BASE_URL = `http://localhost:3001/jobs/6/`;
@@ -76,6 +77,7 @@ function App() {
         <Header />
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/info" element={<JobInfo />} />
         </Routes>
       </Main>
     </Router>
