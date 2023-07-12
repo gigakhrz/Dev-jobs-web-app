@@ -30,12 +30,14 @@ function App() {
     } catch (error) {}
   };
 
+  const jobs = useSelector((store: RootState) => store.devJob.jobs);
+
   //apply filters
 
   const applyFilters = (): DevJob[] => {
     const { title, location, fullTime } = filters;
 
-    let filteredJob = useSelector((store: RootState) => store.devJob.jobs);
+    let filteredJob = jobs;
 
     if (title) {
       filteredJob = filteredJob.filter((job) => {
@@ -56,9 +58,17 @@ function App() {
     return filteredJob;
   };
 
+  // when changing filter
+  useEffect(() => {
+    const filteredJobs = applyFilters();
+    dispatch(setJobs(filteredJobs));
+  }, [filters]);
+
+  //when changing page
   useEffect(() => {
     fetchJobs();
   }, [page]);
+
   return (
     <Router>
       <Main>

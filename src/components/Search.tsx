@@ -5,6 +5,9 @@ import { useSelector } from "react-redux";
 const Search = (): JSX.Element => {
   // lightmode state
   const mode = useSelector((store: RootState) => store.lightMode.dark);
+  const filters = useSelector((store: RootState) => store.devJob.filters);
+
+  console.log(filters);
 
   return (
     <SearchContainer mode={mode}>
