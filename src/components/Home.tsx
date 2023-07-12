@@ -107,13 +107,13 @@ const Job = styled.div<{ bg: string; mode: boolean }>`
     h3 {
       font-size: 16px;
       font-weight: 400;
+      color: #6e8098;
     }
 
     h2 {
       color: ${(props) => (props.mode ? "white" : "#19202D")};
       font-size: 19px;
       font-weight: 700;
-      color: #6e8098;
     }
 
     h4 {
