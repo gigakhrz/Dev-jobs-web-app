@@ -1,25 +1,25 @@
 import styled from "styled-components";
 import { RootState } from "../features/store";
-import { useDispatch, useSelector } from "react-redux";
-import { setFilters } from "../features/DevJobsSlice";
+import { useSelector } from "react-redux";
 
-const Search = (): JSX.Element => {
+interface Searchprops {
+  setTitle: (title: string) => void;
+}
+
+const Search = ({ setTitle }: Searchprops): JSX.Element => {
   // lightmode state
   const mode = useSelector((store: RootState) => store.lightMode.dark);
 
-  //   ჩასააასწორებელიააა////
-  const filters = useSelector((store: RootState) => store.devJob.filters);
-
-  const dispatch = useDispatch();
-
-  const handleSubmit = (): void => {
-    dispatch(setFilters({ title: "software" }));
-  };
-  //
-
   return (
     <SearchContainer mode={mode}>
-      <input type="text" placeholder="Filter by title…" />
+      <input
+        type="text"
+        onChange={(e) => {
+          e.preventDefault();
+          setTitle(e.target.value);
+        }}
+        placeholder="Filter by title…"
+      />
       <div className="container">
         <svg
           width="20"
@@ -49,7 +49,7 @@ const Search = (): JSX.Element => {
 
 export default Search;
 
-const SearchContainer = styled.form<{ mode: boolean }>`
+const SearchContainer = styled.div<{ mode: boolean }>`
   width: 87.2%;
   background-color: ${(props) => (props.mode ? "#19202D" : "white")};
   border-radius: 6px;

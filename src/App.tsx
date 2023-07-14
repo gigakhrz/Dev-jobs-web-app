@@ -18,9 +18,6 @@ function App() {
   //page state
   const page = useSelector((store: RootState) => store.page.page);
 
-  //filter state
-  const filters = useSelector((store: RootState) => store.devJob.filters);
-
   const dispatch = useDispatch();
 
   //fetching jobs from api
@@ -30,40 +27,6 @@ function App() {
       dispatch(setJobs(response.data));
     } catch (error) {}
   };
-
-  const jobs = useSelector((store: RootState) => store.devJob.jobs);
-
-  //apply filters
-
-  const applyFilters = (): DevJob[] => {
-    const { title, location, fullTime } = filters;
-
-    let filteredJob = jobs;
-
-    if (title) {
-      filteredJob = filteredJob.filter((job) => {
-        job.position.toLowerCase().includes(title.toLowerCase());
-      });
-    }
-
-    if (location) {
-      filteredJob = filteredJob.filter((job) => {
-        job.location.toLowerCase().includes(location.toLowerCase());
-      });
-    }
-
-    if (fullTime) {
-      filteredJob = filteredJob.filter((job) => job.contract === "Full Time");
-    }
-
-    return filteredJob;
-  };
-
-  // when changing filter
-  useEffect(() => {
-    const filteredJobs = applyFilters();
-    dispatch(setJobs(filteredJobs));
-  }, [filters]);
 
   //when changing page
   useEffect(() => {

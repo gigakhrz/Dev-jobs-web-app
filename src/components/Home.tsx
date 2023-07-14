@@ -4,8 +4,10 @@ import { useSelector, useDispatch } from "react-redux";
 import Search from "./Search";
 import { setPage } from "../features/pageSlice";
 import { setInfo } from "../features/moreInfo";
+import { useState } from "react";
 
 const Home = (): JSX.Element => {
+  const [title, setTitle] = useState<string>("");
   // lightmode state
   const mode = useSelector((store: RootState) => store.lightMode.dark);
   const jobs = useSelector((store: RootState) => store.devJob.jobs);
@@ -22,28 +24,39 @@ const Home = (): JSX.Element => {
   };
   return (
     <HomeContainer mode={mode}>
-      <Search />
-      {jobs.map((job, index) => (
-        <Job
-          href="/info"
-          onClick={() => getJobId(job.id)}
-          key={index}
-          bg={job.logoBackground}
-          mode={mode}
-        >
-          <div className="company">
-            <img src={job.logo} alt="company logo" />
-          </div>
+      <Search setTitle={setTitle} />
+      {jobs
+        .filter((job) => {
+          if (title === "") {
+            return job;
+          } else if (job.position.toLowerCase().includes(title.toLowerCase())) {
+            return job;
+          }
+        })
+        .map((job, index) => (
+          <Job
+            href="/info"
+            onClick={(e: any) => {
+              e.preventDefault();
+              getJobId(job.id);
+            }}
+            key={index}
+            bg={job.logoBackground}
+            mode={mode}
+          >
+            <div className="company">
+              <img src={job.logo} alt="company logo" />
+            </div>
 
-          <div className="titleContainer">
-            <h3 className="contract">{`${job.postedAt} . ${job.contract}`}</h3>
-            <h2>{job.position}</h2>
-            <h3>{job.company}</h3>
+            <div className="titleContainer">
+              <h3 className="contract">{`${job.postedAt} . ${job.contract}`}</h3>
+              <h2>{job.position}</h2>
+              <h3>{job.company}</h3>
 
-            <h4>{job.location}</h4>
-          </div>
-        </Job>
-      ))}
+              <h4>{job.location}</h4>
+            </div>
+          </Job>
+        ))}
 
       <button
         className="more"

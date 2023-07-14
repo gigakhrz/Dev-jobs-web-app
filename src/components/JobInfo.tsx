@@ -7,7 +7,7 @@ const JobInfo = (): JSX.Element => {
   const jobs = useSelector((store: RootState) => store.devJob.jobs);
   const job = jobs.filter((job) => job.id === jobId);
 
-  console.log(job);
+  console.log(jobId);
   return <></>;
 };
 

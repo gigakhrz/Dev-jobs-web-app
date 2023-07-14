@@ -21,7 +21,7 @@ const Header = (): JSX.Element => {
         src={logo}
         alt="Logo img"
         onClick={() => {
-          location.reload;
+          location.reload();
         }}
       />
       <LightMode>
