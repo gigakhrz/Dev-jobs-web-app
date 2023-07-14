@@ -1,8 +1,8 @@
 import styled from "styled-components";
 import { RootState } from "../features/store";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Filter from "./Filter";
-import { useState } from "react";
+import { setFilter } from "../features/mobileFilterSlice";
 
 interface Searchprops {
   setTitle: (title: string) => void;
@@ -12,7 +12,8 @@ const Search = ({ setTitle }: Searchprops): JSX.Element => {
   // lightmode state
   const mode = useSelector((store: RootState) => store.lightMode.dark);
 
-  const [openFilter, setOpenFilter] = useState<boolean>(false);
+  //for mobile filter
+  const dispatch = useDispatch();
 
   return (
     <SearchContainer mode={mode}>
@@ -27,7 +28,7 @@ const Search = ({ setTitle }: Searchprops): JSX.Element => {
       <Filter />
       <div className="container">
         <svg
-          onClick={() => setOpenFilter(!openFilter)}
+          onClick={() => dispatch(setFilter())}
           width="20"
           height="20"
           xmlns="http://www.w3.org/2000/svg"

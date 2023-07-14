@@ -84,6 +84,7 @@ const HomeContainer = styled.div<{ mode: boolean }>`
   position: relative;
   gap: 50px;
   margin-top: 100px;
+  position: relative;
 
   .more {
     border: none;

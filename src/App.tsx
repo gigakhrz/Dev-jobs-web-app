@@ -10,6 +10,7 @@ import { setJobs } from "./features/DevJobsSlice";
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import Home from "./components/Home";
 import JobInfo from "./components/JobInfo";
+import { setFilter } from "./features/mobileFilterSlice";
 
 //Api adress
 export const API_BASE_URL = `http://localhost:3001/jobs/6/`;
@@ -19,6 +20,14 @@ function App() {
   const page = useSelector((store: RootState) => store.page.page);
 
   const dispatch = useDispatch();
+
+  // lightmode state
+  const mode = useSelector((store: RootState) => store.lightMode.dark);
+
+  //mobile filter open/close state
+  const mobileFilter = useSelector(
+    (store: RootState) => store.setFilter.filter
+  );
 
   //fetching jobs from api
   const fetchJobs = async (): Promise<void> => {
@@ -35,8 +44,9 @@ function App() {
 
   return (
     <Router>
-      <Main>
+      <Main mode={mode}>
         <GlobalStyles />
+        <BlackDiv filter={mobileFilter} onClick={() => dispatch(setFilter())} />
         <Header />
         <Routes>
           <Route path="/" element={<Home />} />
@@ -49,11 +59,27 @@ function App() {
 
 export default App;
 
-const Main = styled.div`
+const Main = styled.div<{ mode: boolean }>`
   width: 100%;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
-  background: #f4f6f8;
+  background-color: ${(props) => (props.mode ? "#19202D" : "white")};
+  position: relative;
+`;
+
+//for when mobile filter is open to have opacity
+
+const BlackDiv = styled.div<{ filter: boolean }>`
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  background: black;
+  opacity: 0.5;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  z-index: 1;
+  display: ${(props) => (props.filter ? "block" : "none")};
 `;

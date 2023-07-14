@@ -6,8 +6,13 @@ import { RootState } from "../features/store";
 const Filter = (): JSX.Element => {
   // lightmode state
   const mode = useSelector((store: RootState) => store.lightMode.dark);
+
+  //mobile filter open/close state
+  const mobileFilter = useSelector(
+    (store: RootState) => store.setFilter.filter
+  );
   return (
-    <FilterContainer mode={mode}>
+    <FilterContainer mode={mode} filter={mobileFilter}>
       <div className="location">
         <img src={locationIcon} alt="location icon" />
         <input type="text" placeholder="Filter by location…" />
@@ -16,21 +21,27 @@ const Filter = (): JSX.Element => {
       <hr />
       <h3>Full Time Only</h3>
       <div className="fullTime"></div>
+      <div className="opacity"></div>
     </FilterContainer>
   );
 };
 
 export default Filter;
 
-const FilterContainer = styled.div<{ mode: boolean }>`
+const FilterContainer = styled.div<{ mode: boolean; filter: boolean }>`
   width: 327px;
   padding: 24px;
   background-color: ${(props) => (props.mode ? "#19202D" : "white")};
   position: absolute;
-  display: flex;
+  display: ${(props) => (props.filter ? "flex" : "none")};
   flex-direction: column;
   align-items: center;
   gap: 27px;
+  left: 50%;
+  top: 225px;
+  transform: translateX(-50%);
+  z-index: 2;
+  border-radius: 6px;
 
   .location {
     width: 100%;
