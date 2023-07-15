@@ -65,7 +65,7 @@ const Main = styled.div<{ mode: boolean }>`
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: ${(props) => (props.mode ? "#19202D" : "white")};
+  background-color: ${(props) => (props.mode ? "#19202D" : "#f4f6f8")};
   position: relative;
 `;
 

@@ -15,13 +15,21 @@ const Filter = (): JSX.Element => {
     <FilterContainer mode={mode} filter={mobileFilter}>
       <div className="location">
         <img src={locationIcon} alt="location icon" />
-        <input type="text" placeholder="Filter by location…" />
+        <input
+          className="filterLocatin"
+          type="text"
+          placeholder="Filter by location…"
+        />
       </div>
 
       <hr />
-      <h3>Full Time Only</h3>
-      <div className="fullTime"></div>
-      <div className="opacity"></div>
+
+      <div className="fullTime">
+        <input className="checkbox" type="checkbox" />
+        <h3>Full Time Only</h3>
+      </div>
+
+      <button>Search</button>
     </FilterContainer>
   );
 };
@@ -46,12 +54,12 @@ const FilterContainer = styled.div<{ mode: boolean; filter: boolean }>`
   .location {
     width: 100%;
     display: flex;
-    align-items: start;
+    align-items: center;
     gap: 16px;
-    justify-content: center;
+    justify-content: start;
   }
 
-  input {
+  .filterLocation {
     min-width: 220px;
     color: ${(props) => (props.mode ? "white" : "#19202d")};
     font-size: 16px;
@@ -61,17 +69,47 @@ const FilterContainer = styled.div<{ mode: boolean; filter: boolean }>`
     outline: none;
   }
 
-  .fulltime {
+  hr {
+    border: none;
+    outline: none;
+    width: 100%;
+    height: 1px;
+    background: #6e8098;
+    opacity: 0.2;
+  }
+
+  .fullTime {
     width: 100%;
     display: flex;
-    align-items: start;
+    align-items: center;
     gap: 16px;
-    justify-content: center;
+    justify-content: start;
+
+    .checkbox {
+      width: 24px;
+      height: 24px;
+      background: none;
+      border: none;
+      outline: none;
+    }
 
     h3 {
       color: ${(props) => (props.mode ? "white" : "#19202d")};
       font-size: 16px;
       font-weight: 700;
     }
+  }
+
+  button {
+    width: 279px;
+    height: 48px;
+    color: #fff;
+    text-align: center;
+    font-family: Kumbh Sans;
+    font-size: 16px;
+    font-weight: 700;
+    background-color: #5964e0;
+    border: none;
+    border-radius: 5px;
   }
 `;
