@@ -12,35 +12,40 @@ import Home from "./components/Home";
 import JobInfo from "./components/JobInfo";
 import { setFilter } from "./features/mobileFilterSlice";
 
-//Api adress
-export const API_BASE_URL = `http://localhost:3001/jobs/6/`;
+//Api address
+export const API_BASE_URL = `http://localhost:3001/jobs/`;
+const size = 6;
 
 function App() {
-  //page state
-  const page = useSelector((store: RootState) => store.page.page);
+  // page state
+  const currentPage = useSelector((store: RootState) => store.page.page); // Rename to currentPage
 
   const dispatch = useDispatch();
 
   // lightmode state
   const mode = useSelector((store: RootState) => store.lightMode.dark);
 
-  //mobile filter open/close state
+  // mobile filter open/close state
   const mobileFilter = useSelector(
     (store: RootState) => store.setFilter.filter
   );
 
-  //fetching jobs from api
+  // fetching jobs from api
   const fetchJobs = async (): Promise<void> => {
+    const url = `${API_BASE_URL}${size}/${currentPage}?title=senior&location=united`;
+
     try {
-      const response = await axios.get<DevJob[]>(`${API_BASE_URL}${page}`);
+      const response = await axios.get<DevJob[]>(url);
       dispatch(setJobs(response.data));
-    } catch (error) {}
+    } catch (error) {
+      // Handle error
+    }
   };
 
-  //when changing page
+  // when changing page
   useEffect(() => {
     fetchJobs();
-  }, [page]);
+  }, [currentPage]);
 
   return (
     <Router>
@@ -58,14 +63,13 @@ function App() {
 }
 
 export default App;
-
 const Main = styled.div<{ mode: boolean }>`
   width: 100%;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: ${(props) => (props.mode ? "#19202D" : "#f4f6f8")};
+  background-color: ${(props) => (props.mode ? "#121721" : "#f4f6f8")};
   position: relative;
 `;
 

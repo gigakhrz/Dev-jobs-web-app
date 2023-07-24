@@ -4,7 +4,8 @@ import { useSelector, useDispatch } from "react-redux";
 import Search from "./Search";
 import { setPage } from "../features/pageSlice";
 import { setInfo } from "../features/moreInfo";
-import { useState } from "react";
+import { useCallback, useState } from "react";
+import { Link } from "react-router-dom";
 
 const Home = (): JSX.Element => {
   const [title, setTitle] = useState<string>("");
@@ -19,9 +20,14 @@ const Home = (): JSX.Element => {
     dispatch(setPage(1));
   };
 
-  const getJobId = (x: number): void => {
-    dispatch(setInfo(x));
-  };
+  // Memoize the getJobId function with useCallback to prevent re-rendering and state reset
+  const getJobId = useCallback(
+    (x: number): void => {
+      dispatch(setInfo(x));
+    },
+    [dispatch]
+  );
+
   return (
     <HomeContainer mode={mode}>
       <Search setTitle={setTitle} />
@@ -34,28 +40,28 @@ const Home = (): JSX.Element => {
           }
         })
         .map((job, index) => (
-          <Job
-            href="/info"
-            onClick={(e: any) => {
-              e.preventDefault();
-              getJobId(job.id);
-            }}
-            key={index}
-            bg={job.logoBackground}
-            mode={mode}
-          >
-            <div className="company">
-              <img src={job.logo} alt="company logo" />
-            </div>
+          <Link className="info" to="/info">
+            <Job
+              onClick={() => {
+                getJobId(job.id);
+              }}
+              key={index}
+              bg={job.logoBackground}
+              mode={mode}
+            >
+              <div className="company">
+                <img src={job.logo} alt="company logo" />
+              </div>
 
-            <div className="titleContainer">
-              <h3 className="contract">{`${job.postedAt} . ${job.contract}`}</h3>
-              <h2>{job.position}</h2>
-              <h3>{job.company}</h3>
+              <div className="titleContainer">
+                <h3 className="contract">{`${job.postedAt} . ${job.contract}`}</h3>
+                <h2>{job.position}</h2>
+                <h3>{job.company}</h3>
 
-              <h4>{job.location}</h4>
-            </div>
-          </Job>
+                <h4>{job.location}</h4>
+              </div>
+            </Job>
+          </Link>
         ))}
 
       <button
@@ -96,9 +102,14 @@ const HomeContainer = styled.div<{ mode: boolean }>`
     font-weight: 700;
     color: white;
   }
+
+  .info {
+    width: 100%;
+    text-decoration: none;
+  }
 `;
 
-const Job = styled.a<{ bg: string; mode: boolean }>`
+const Job = styled.div<{ bg: string; mode: boolean }>`
   width: 100%;
   padding: 50px 32px 32px;
   border-radius: 6px;
