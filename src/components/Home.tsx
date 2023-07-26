@@ -8,7 +8,11 @@ import { useCallback, useState } from "react";
 import { Link } from "react-router-dom";
 
 const Home = (): JSX.Element => {
+  //states for filter
   const [title, setTitle] = useState<string>("");
+  const [location, setLocation] = useState<string>("");
+  const [fullTime, setFullTime] = useState<boolean>(false);
+
   // lightmode state
   const mode = useSelector((store: RootState) => store.lightMode.dark);
   const jobs = useSelector((store: RootState) => store.devJob.jobs);
@@ -27,6 +31,24 @@ const Home = (): JSX.Element => {
     },
     [dispatch]
   );
+  //
+  function filterJobs(title: string, fullTime: boolean, location: string) {
+    let filteredJobs = jobs;
+
+    if (title) {
+      filteredJobs = filteredJobs.filter((job) => job.position === title);
+    }
+
+    if (fullTime) {
+      filteredJobs = filteredJobs.filter((job) => job.contract === "Full Time");
+    }
+
+    if (location) {
+      filteredJobs = filteredJobs.filter((job) => job.location === location);
+    }
+
+    return filteredJobs;
+  }
 
   return (
     <HomeContainer mode={mode}>
@@ -40,7 +62,7 @@ const Home = (): JSX.Element => {
           }
         })
         .map((job, index) => (
-          <Link className="info" to="/info">
+          <Link className="info" to="/info" key={index}>
             <Job
               onClick={() => {
                 getJobId(job.id);

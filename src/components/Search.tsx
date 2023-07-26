@@ -3,6 +3,7 @@ import { RootState } from "../features/store";
 import { useDispatch, useSelector } from "react-redux";
 import Filter from "./Filter";
 import { setFilter } from "../features/mobileFilterSlice";
+import { useState } from "react";
 
 interface Searchprops {
   setTitle: (title: string) => void;
@@ -12,17 +13,24 @@ const Search = ({ setTitle }: Searchprops): JSX.Element => {
   // lightmode state
   const mode = useSelector((store: RootState) => store.lightMode.dark);
 
+  //for title
+  const [inputValue, setInputValue] = useState<string>("");
+
   //for mobile filter
   const dispatch = useDispatch();
 
   return (
-    <SearchContainer mode={mode}>
+    <SearchContainer
+      onSubmit={(e: any) => {
+        e.preventDefault();
+        setTitle(inputValue);
+      }}
+      mode={mode}
+    >
       <input
+        value={inputValue}
         type="text"
-        onChange={(e) => {
-          e.preventDefault();
-          setTitle(e.target.value);
-        }}
+        onChange={(e) => setInputValue(e.target.value)}
         placeholder="Filter by title…"
       />
       <Filter />
@@ -56,7 +64,7 @@ const Search = ({ setTitle }: Searchprops): JSX.Element => {
 
 export default Search;
 
-const SearchContainer = styled.div<{ mode: boolean }>`
+const SearchContainer = styled.form<{ mode: boolean }>`
   width: 87.2%;
   background-color: ${(props) => (props.mode ? "#19202D" : "white")};
   border-radius: 6px;
