@@ -31,12 +31,15 @@ const Home = (): JSX.Element => {
     },
     [dispatch]
   );
-  //
+
+  //to filter jobs
   function filterJobs(title: string, fullTime: boolean, location: string) {
     let filteredJobs = jobs;
 
     if (title) {
-      filteredJobs = filteredJobs.filter((job) => job.position === title);
+      filteredJobs = filteredJobs.filter((job) =>
+        job.position.toLowerCase().includes(title)
+      );
     }
 
     if (fullTime) {
@@ -44,47 +47,54 @@ const Home = (): JSX.Element => {
     }
 
     if (location) {
-      filteredJobs = filteredJobs.filter((job) => job.location === location);
+      filteredJobs = filteredJobs.filter((job) =>
+        job.location.toLowerCase().includes(location)
+      );
     }
 
     return filteredJobs;
   }
+  const filteredJobs = filterJobs(title, fullTime, location);
 
+  console.log(filteredJobs);
   return (
     <HomeContainer mode={mode}>
-      <Search setTitle={setTitle} />
-      {jobs
-        .filter((job) => {
-          if (title === "") {
-            return job;
-          } else if (job.position.toLowerCase().includes(title.toLowerCase())) {
-            return job;
-          }
-        })
-        .map((job, index) => (
-          <Link className="info" to="/info" key={index}>
-            <Job
-              onClick={() => {
-                getJobId(job.id);
-              }}
-              key={index}
-              bg={job.logoBackground}
-              mode={mode}
-            >
-              <div className="company">
-                <img src={job.logo} alt="company logo" />
-              </div>
+      <Search
+        setTitle={setTitle}
+        setLocation={setLocation}
+        setFullTime={setFullTime}
+      />
+      {(title !== ""
+        ? filteredJobs
+        : location !== ""
+        ? filteredJobs
+        : fullTime !== false
+        ? filteredJobs
+        : jobs
+      ).map((job, index) => (
+        <Link className="info" to="/info" key={index}>
+          <Job
+            onClick={() => {
+              getJobId(job.id);
+            }}
+            key={index}
+            bg={job.logoBackground}
+            mode={mode}
+          >
+            <div className="company">
+              <img src={job.logo} alt="company logo" />
+            </div>
 
-              <div className="titleContainer">
-                <h3 className="contract">{`${job.postedAt} . ${job.contract}`}</h3>
-                <h2>{job.position}</h2>
-                <h3>{job.company}</h3>
+            <div className="titleContainer">
+              <h3 className="contract">{`${job.postedAt} . ${job.contract}`}</h3>
+              <h2>{job.position}</h2>
+              <h3>{job.company}</h3>
 
-                <h4>{job.location}</h4>
-              </div>
-            </Job>
-          </Link>
-        ))}
+              <h4>{job.location}</h4>
+            </div>
+          </Job>
+        </Link>
+      ))}
 
       <button
         className="more"

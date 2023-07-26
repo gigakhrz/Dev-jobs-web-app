@@ -3,7 +3,17 @@ import locationIcon from "../../public/assets/desktop/icon-location.svg";
 import { useSelector } from "react-redux";
 import { RootState } from "../features/store";
 
-const Filter = (): JSX.Element => {
+interface FilterProps {
+  setSecondInputValue: (secondInputValue: string) => void;
+  setIsFullTime: (isFullTime: boolean) => void;
+  isFulltime: boolean;
+}
+
+const Filter = ({
+  setSecondInputValue,
+  setIsFullTime,
+  isFulltime,
+}: FilterProps): JSX.Element => {
   // lightmode state
   const mode = useSelector((store: RootState) => store.lightMode.dark);
 
@@ -19,13 +29,18 @@ const Filter = (): JSX.Element => {
           className="filterLocatin"
           type="text"
           placeholder="Filter by location…"
+          onChange={(e) => setSecondInputValue(e.target.value)}
         />
       </div>
 
       <hr />
 
       <div className="fullTime">
-        <input className="checkbox" type="checkbox" />
+        <input
+          className="checkbox"
+          type="checkbox"
+          onChange={() => setIsFullTime(!isFulltime)}
+        />
         <h3>Full Time Only</h3>
       </div>
 

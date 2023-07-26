@@ -7,14 +7,22 @@ import { useState } from "react";
 
 interface Searchprops {
   setTitle: (title: string) => void;
+  setLocation: (location: string) => void;
+  setFullTime: (fullTime: boolean) => void;
 }
 
-const Search = ({ setTitle }: Searchprops): JSX.Element => {
+const Search = ({
+  setTitle,
+  setFullTime,
+  setLocation,
+}: Searchprops): JSX.Element => {
   // lightmode state
   const mode = useSelector((store: RootState) => store.lightMode.dark);
 
   //for title
   const [inputValue, setInputValue] = useState<string>("");
+  const [secondInputValue, setSecondInputValue] = useState<string>("");
+  const [isFulltime, setIsFullTime] = useState<boolean>(false);
 
   //for mobile filter
   const dispatch = useDispatch();
@@ -24,6 +32,8 @@ const Search = ({ setTitle }: Searchprops): JSX.Element => {
       onSubmit={(e: any) => {
         e.preventDefault();
         setTitle(inputValue);
+        setFullTime(isFulltime);
+        setLocation(secondInputValue);
       }}
       mode={mode}
     >
@@ -33,7 +43,11 @@ const Search = ({ setTitle }: Searchprops): JSX.Element => {
         onChange={(e) => setInputValue(e.target.value)}
         placeholder="Filter by title…"
       />
-      <Filter />
+      <Filter
+        setSecondInputValue={setSecondInputValue}
+        setIsFullTime={setIsFullTime}
+        isFulltime={isFulltime}
+      />
       <div className="container">
         <svg
           onClick={() => dispatch(setFilter())}
