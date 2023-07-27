@@ -1,12 +1,6 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import DevJob from "../../type";
 
-interface Filters {
-  title: string;
-  location: string;
-  fullTime: boolean;
-}
-
 export interface DevJobInterface {
   jobs: DevJob[];
 }

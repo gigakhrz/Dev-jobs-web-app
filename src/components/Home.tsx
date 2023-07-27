@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { RootState } from "../features/store";
+import store, { RootState } from "../features/store";
 import { useSelector, useDispatch } from "react-redux";
 import Search from "./Search";
 import { setPage } from "../features/pageSlice";
@@ -16,7 +16,10 @@ const Home = (): JSX.Element => {
   // lightmode state
   const mode = useSelector((store: RootState) => store.lightMode.dark);
   const jobs = useSelector((store: RootState) => store.devJob.jobs);
-
+  //all jobs
+  const allJobs = useSelector((store: RootState) => store.allDevjob.allJobs);
+  // pageSlice
+  const currentPage = useSelector((store: RootState) => store.page.page);
   const dispatch = useDispatch();
 
   // load more button for to fetch more data
@@ -34,7 +37,7 @@ const Home = (): JSX.Element => {
 
   //to filter jobs
   function filterJobs(title: string, fullTime: boolean, location: string) {
-    let filteredJobs = jobs;
+    let filteredJobs = allJobs;
 
     if (title) {
       filteredJobs = filteredJobs.filter((job) =>
@@ -56,7 +59,11 @@ const Home = (): JSX.Element => {
   }
   const filteredJobs = filterJobs(title, fullTime, location);
 
-  console.log(filteredJobs);
+  // to increase visibleFilteredJobs when user click load more button
+  const visibleJobs = 6 * currentPage;
+
+  //Only 6 items should appear the first time.
+  const visibleFilteredJobs = filteredJobs.slice(0, visibleJobs);
   return (
     <HomeContainer mode={mode}>
       <Search
@@ -65,11 +72,11 @@ const Home = (): JSX.Element => {
         setFullTime={setFullTime}
       />
       {(title !== ""
-        ? filteredJobs
+        ? visibleFilteredJobs
         : location !== ""
-        ? filteredJobs
+        ? visibleFilteredJobs
         : fullTime !== false
-        ? filteredJobs
+        ? visibleFilteredJobs
         : jobs
       ).map((job, index) => (
         <Link className="info" to="/info" key={index}>

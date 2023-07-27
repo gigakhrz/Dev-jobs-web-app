@@ -11,6 +11,7 @@ import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import Home from "./components/Home";
 import JobInfo from "./components/JobInfo";
 import { setFilter } from "./features/mobileFilterSlice";
+import { setAllJobs } from "./features/allJobSlice";
 
 //Api address
 export const API_BASE_URL = `http://localhost:3001/jobs/`;
@@ -32,13 +33,23 @@ function App() {
 
   // fetching jobs from api
   const fetchJobs = async (): Promise<void> => {
-    const url = `${API_BASE_URL}${size}/${currentPage}?title=senior&location=united`;
+    const url = `${API_BASE_URL}${size}/${currentPage}`;
 
     try {
       const response = await axios.get<DevJob[]>(url);
       dispatch(setJobs(response.data));
     } catch (error) {
       // Handle error
+    }
+
+    //to fetch all Devjob array
+    try {
+      const response = await axios.get<DevJob[]>(
+        `http://localhost:3001/getAll`
+      );
+      dispatch(setAllJobs(response.data));
+    } catch (error) {
+      console.log("can't fetch data");
     }
   };
 

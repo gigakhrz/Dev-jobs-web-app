@@ -4,6 +4,7 @@ import pageSlice, { Page } from "./pageSlice";
 import DevJobsSlice, { DevJobInterface } from "./DevJobsSlice";
 import moreInfoSlice, { info } from "./moreInfo";
 import mobileFilterSlice, { MobileFilter } from "./mobileFilterSlice";
+import allJobSlice, { allDevJobInterface } from "./allJobSlice";
 const store = configureStore({
   reducer: {
     lightMode: lightModeSLice,
@@ -11,6 +12,7 @@ const store = configureStore({
     devJob: DevJobsSlice,
     moreInfo: moreInfoSlice,
     setFilter: mobileFilterSlice,
+    allDevjob: allJobSlice,
   },
 });
 
@@ -20,6 +22,7 @@ export type RootState = {
   devJob: DevJobInterface;
   moreInfo: info;
   setFilter: MobileFilter;
+  allDevjob: allDevJobInterface;
 };
 
 export default store;

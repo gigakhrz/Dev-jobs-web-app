@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-interface MobileFilter {
+export interface MobileFilter {
   filter: boolean;
 }
 
