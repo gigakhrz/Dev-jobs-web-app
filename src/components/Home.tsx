@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import store, { RootState } from "../features/store";
+import { RootState } from "../features/store";
 import { useSelector, useDispatch } from "react-redux";
 import Search from "./Search";
 import { setPage } from "../features/pageSlice";

@@ -15,8 +15,11 @@ const pageSlice = createSlice({
     setPage: (state, action: PayloadAction<number>) => {
       state.page = state.page + action.payload;
     },
+    setDefaultPage: (state, action: PayloadAction<number>) => {
+      state.page = action.payload;
+    },
   },
 });
 
-export const { setPage } = pageSlice.actions;
+export const { setPage, setDefaultPage } = pageSlice.actions;
 export default pageSlice.reducer;

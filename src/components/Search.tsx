@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Filter from "./Filter";
 import { setFilter } from "../features/mobileFilterSlice";
 import { useState } from "react";
+import { setDefaultPage, setPage } from "../features/pageSlice";
 
 interface Searchprops {
   setTitle: (title: string) => void;
@@ -34,6 +35,7 @@ const Search = ({
         setTitle(inputValue);
         setFullTime(isFulltime);
         setLocation(secondInputValue);
+        dispatch(setDefaultPage(1));
       }}
       mode={mode}
     >
