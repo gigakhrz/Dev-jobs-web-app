@@ -72,37 +72,39 @@ const Home = (): JSX.Element => {
         setLocation={setLocation}
         setFullTime={setFullTime}
       />
-      {(title !== ""
-        ? visibleFilteredJobs
-        : location !== ""
-        ? visibleFilteredJobs
-        : fullTime !== false
-        ? visibleFilteredJobs
-        : jobs
-      ).map((job, index) => (
-        <Link className="info" to="/info" key={index}>
-          <Job
-            onClick={() => {
-              getJobId(job.id);
-            }}
-            key={index}
-            bg={job.logoBackground}
-            mode={mode}
-          >
-            <div className="company">
-              <img src={job.logo} alt="company logo" />
-            </div>
+      <div className="cardWrapper">
+        {(title !== ""
+          ? visibleFilteredJobs
+          : location !== ""
+          ? visibleFilteredJobs
+          : fullTime !== false
+          ? visibleFilteredJobs
+          : jobs
+        ).map((job, index) => (
+          <Link className="info" to="/info" key={index}>
+            <Job
+              onClick={() => {
+                getJobId(job.id);
+              }}
+              key={index}
+              bg={job.logoBackground}
+              mode={mode}
+            >
+              <div className="company">
+                <img src={job.logo} alt="company logo" />
+              </div>
 
-            <div className="titleContainer">
-              <h3 className="contract">{`${job.postedAt} . ${job.contract}`}</h3>
-              <h2>{job.position}</h2>
-              <h3>{job.company}</h3>
+              <div className="titleContainer">
+                <h3 className="contract">{`${job.postedAt} . ${job.contract}`}</h3>
+                <h2>{job.position}</h2>
+                <h3>{job.company}</h3>
 
-              <h4>{job.location}</h4>
-            </div>
-          </Job>
-        </Link>
-      ))}
+                <h4>{job.location}</h4>
+              </div>
+            </Job>
+          </Link>
+        ))}
+      </div>
 
       <button
         className="more"
@@ -131,6 +133,9 @@ const HomeContainer = styled.div<{ mode: boolean }>`
   gap: 50px;
   margin-top: 100px;
   position: relative;
+  @media screen and (min-width: 768px) {
+    padding: 0 39px 61px;
+  }
 
   .more {
     border: none;
@@ -141,11 +146,31 @@ const HomeContainer = styled.div<{ mode: boolean }>`
     font-size: 16px;
     font-weight: 700;
     color: white;
+    cursor: pointer;
   }
 
   .info {
     width: 100%;
     text-decoration: none;
+    @media screen and (min-width: 768px) {
+      width: 339px;
+    }
+  }
+
+  .cardWrapper {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 49px;
+    flex-direction: column;
+
+    @media screen and (min-width: 768px) {
+      flex-wrap: wrap;
+      flex-direction: row;
+      row-gap: 65px;
+      column-gap: 11px;
+    }
   }
 `;
 
