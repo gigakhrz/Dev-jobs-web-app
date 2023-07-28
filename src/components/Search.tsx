@@ -4,8 +4,8 @@ import { useDispatch, useSelector } from "react-redux";
 import Filter from "./Filter";
 import { setFilter } from "../features/mobileFilterSlice";
 import { useState } from "react";
-import { setDefaultPage, setPage } from "../features/pageSlice";
-
+import { setDefaultPage } from "../features/pageSlice";
+import Navbar from "./NavBar";
 interface Searchprops {
   setTitle: (title: string) => void;
   setLocation: (location: string) => void;
@@ -39,7 +39,15 @@ const Search = ({
       }}
       mode={mode}
     >
+      <Navbar
+        inputValue={inputValue}
+        setInputValue={setInputValue}
+        setSecondInputValue={setSecondInputValue}
+        setIsFullTime={setIsFullTime}
+        isFulltime={isFulltime}
+      />
       <input
+        className="titleInput"
         value={inputValue}
         type="text"
         onChange={(e) => setInputValue(e.target.value)}
@@ -90,8 +98,13 @@ const SearchContainer = styled.form<{ mode: boolean }>`
   justify-content: space-between;
   position: absolute;
   top: -140px;
+  @media screen and (min-width: 768px) {
+    justify-content: center;
+    padding: 0 24px;
+    min-width: 711px;
+  }
 
-  input {
+  .titleInput {
     width: 60%;
     color: ${(props) => (props.mode ? "white" : "#19202d")};
     font-size: 16px;

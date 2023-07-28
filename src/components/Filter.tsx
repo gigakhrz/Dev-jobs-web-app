@@ -3,7 +3,7 @@ import locationIcon from "../../public/assets/desktop/icon-location.svg";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../features/store";
 import { closeFilter } from "../features/mobileFilterSlice";
-
+import searchIcon from "../../public/assets/desktop/icon-search.svg";
 interface FilterProps {
   setSecondInputValue: (secondInputValue: string) => void;
   setIsFullTime: (isFullTime: boolean) => void;
