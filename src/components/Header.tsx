@@ -5,6 +5,7 @@ import sun from "../../public/assets/desktop/icon-sun.svg";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../features/store";
 import { setDark } from "../features/lightModeSLice";
+import bagckgorundImage from "../../public/assets/desktop/bg-pattern-header.svg";
 
 const Header = (): JSX.Element => {
   const mode = useSelector((store: RootState) => store.lightMode.dark);
@@ -20,12 +21,12 @@ const Header = (): JSX.Element => {
   };
 
   return (
-    <HeaderCont>
+    <HeaderCont bagckgorundImage={bagckgorundImage}>
       <img
         src={logo}
         alt="Logo img"
         onClick={() => {
-         handleGoToHomePage()
+          handleGoToHomePage();
         }}
       />
       <LightMode>
@@ -42,13 +43,19 @@ const Header = (): JSX.Element => {
 
 export default Header;
 
-const HeaderCont = styled.header`
+const HeaderCont = styled.header<{ bagckgorundImage: string }>`
   width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
   background-color: #5964e0;
   padding: 32px 24px 72px;
+
+  @media screen and (min-width: 768px) {
+    background-image: url(${(props) => props.bagckgorundImage});
+    background-color: transparent;
+    min-height: 160px;
+  }
 
   img {
     cursor: pointer;
