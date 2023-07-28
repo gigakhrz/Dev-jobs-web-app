@@ -3,7 +3,7 @@ import locationIcon from "../../public/assets/desktop/icon-location.svg";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../features/store";
 import { closeFilter } from "../features/mobileFilterSlice";
-import searchIcon from "../../public/assets/desktop/icon-search.svg";
+
 interface FilterProps {
   setSecondInputValue: (secondInputValue: string) => void;
   setIsFullTime: (isFullTime: boolean) => void;
@@ -17,7 +17,6 @@ const Filter = ({
 }: FilterProps): JSX.Element => {
   // lightmode state
   const mode = useSelector((store: RootState) => store.lightMode.dark);
-
   //mobile filter open/close state
   const mobileFilter = useSelector(
     (store: RootState) => store.setFilter.filter
@@ -27,11 +26,11 @@ const Filter = ({
   const dispatch = useDispatch();
 
   return (
-    <FilterContainer mode={mode} filter={mobileFilter}>
+    <FilterContainer mode={mode} filter={mobileFilter} isFullTime={isFulltime}>
       <div className="location">
         <img src={locationIcon} alt="location icon" />
         <input
-          className="filterLocatin"
+          className="filterLocation"
           type="text"
           placeholder="Filter by location…"
           onChange={(e) => setSecondInputValue(e.target.value)}
@@ -58,7 +57,11 @@ const Filter = ({
 
 export default Filter;
 
-const FilterContainer = styled.div<{ mode: boolean; filter: boolean }>`
+const FilterContainer = styled.div<{
+  mode: boolean;
+  filter: boolean;
+  isFullTime: boolean;
+}>`
   width: 327px;
   padding: 24px;
   background-color: ${(props) => (props.mode ? "#19202D" : "white")};
@@ -93,6 +96,7 @@ const FilterContainer = styled.div<{ mode: boolean; filter: boolean }>`
     background: none;
     border: none;
     outline: none;
+    background: none;
   }
 
   hr {
@@ -114,9 +118,11 @@ const FilterContainer = styled.div<{ mode: boolean; filter: boolean }>`
     .checkbox {
       width: 24px;
       height: 24px;
-      background: none;
+      background: ${(props) => (props.mode ? "white" : "#19202d")};
+      opacity: ${(props) => (props.isFullTime ? "" : "0.1")};
       border: none;
       outline: none;
+      border-radius: 3px;
     }
 
     h3 {
