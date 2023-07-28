@@ -57,6 +57,7 @@ const Home = (): JSX.Element => {
 
     return filteredJobs;
   }
+
   const filteredJobs = filterJobs(title, fullTime, location);
 
   // to increase visibleFilteredJobs when user click load more button

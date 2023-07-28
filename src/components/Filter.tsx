@@ -1,7 +1,8 @@
 import { styled } from "styled-components";
 import locationIcon from "../../public/assets/desktop/icon-location.svg";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../features/store";
+import { closeFilter } from "../features/mobileFilterSlice";
 
 interface FilterProps {
   setSecondInputValue: (secondInputValue: string) => void;
@@ -21,6 +22,10 @@ const Filter = ({
   const mobileFilter = useSelector(
     (store: RootState) => store.setFilter.filter
   );
+
+  //to close filter when search button clicked
+  const dispatch = useDispatch();
+
   return (
     <FilterContainer mode={mode} filter={mobileFilter}>
       <div className="location">
@@ -44,7 +49,9 @@ const Filter = ({
         <h3>Full Time Only</h3>
       </div>
 
-      <button>Search</button>
+      <button type="submit" onClick={() => dispatch(closeFilter())}>
+        Search
+      </button>
     </FilterContainer>
   );
 };
@@ -65,6 +72,10 @@ const FilterContainer = styled.div<{ mode: boolean; filter: boolean }>`
   transform: translateX(-50%);
   z-index: 2;
   border-radius: 6px;
+
+  @media screen and (min-width: 768px) {
+    display: none;
+  }
 
   .location {
     width: 100%;

@@ -97,4 +97,7 @@ const BlackDiv = styled.div<{ filter: boolean }>`
   bottom: 0;
   z-index: 1;
   display: ${(props) => (props.filter ? "block" : "none")};
+  @media screen and (min-width: 768px) {
+    display: none;
+  }
 `;

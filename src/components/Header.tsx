@@ -15,13 +15,17 @@ const Header = (): JSX.Element => {
     dispatch(setDark(!mode));
   };
 
+  const handleGoToHomePage = (): void => {
+    window.location.href = "http://localhost:5173/";
+  };
+
   return (
     <HeaderCont>
       <img
         src={logo}
         alt="Logo img"
         onClick={() => {
-          location.reload();
+         handleGoToHomePage()
         }}
       />
       <LightMode>

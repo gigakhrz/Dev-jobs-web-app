@@ -15,8 +15,11 @@ const mobileFilterSlice = createSlice({
     setFilter: (state) => {
       state.filter = !state.filter;
     },
+    closeFilter: (state) => {
+      state.filter = false;
+    },
   },
 });
 
-export const { setFilter } = mobileFilterSlice.actions;
+export const { setFilter, closeFilter } = mobileFilterSlice.actions;
 export default mobileFilterSlice.reducer;
