@@ -99,6 +99,9 @@ const SearchContainer = styled.form<{ mode: boolean }>`
     background: none;
     border: none;
     outline: none;
+    @media screen and (min-width: 768px) {
+      display: none;
+    }
   }
 
   .container {
@@ -106,6 +109,9 @@ const SearchContainer = styled.form<{ mode: boolean }>`
     align-items: center;
     justify-content: center;
     gap: 24px;
+    @media screen and (min-width: 768px) {
+      display: none;
+    }
 
     .filter path {
       fill: ${(props) => (props.mode ? "white" : "#6E8098")};
