@@ -1,6 +1,6 @@
 import { styled } from "styled-components";
 import locationIcon from "../../public/assets/desktop/icon-location.svg";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { RootState } from "../features/store";
 import searchIcon from "../../public/assets/desktop/icon-search.svg";
 
@@ -23,9 +23,8 @@ const Navbar = ({
   // lightmode state
   const mode = useSelector((store: RootState) => store.lightMode.dark);
 
-  const dispatch = useDispatch();
   return (
-    <NavBarContainer mode={mode}>
+    <NavBarContainer mode={mode} isFulltime={isFulltime}>
       <div className="wrapper">
         <img src={searchIcon} alt="" />
         <input
@@ -40,7 +39,7 @@ const Navbar = ({
       <hr />
 
       <div className="wrapper">
-        <img src={searchIcon} alt="" />
+        <img src={locationIcon} alt="" />
         <input
           className="filterText"
           type="text"
@@ -69,10 +68,10 @@ const Navbar = ({
 
 export default Navbar;
 
-const NavBarContainer = styled.div<{ mode: boolean }>`
+const NavBarContainer = styled.div<{ mode: boolean; isFulltime: boolean }>`
   display: none;
   align-items: center;
-  justify-content: center;
+  justify-content: space-around;
   gap: 24px;
   @media screen and (min-width: 768px) {
     display: flex;
@@ -95,6 +94,7 @@ const NavBarContainer = styled.div<{ mode: boolean }>`
     background: none;
     border: none;
     outline: none;
+    cursor: pointer;
   }
 
   hr {
@@ -121,9 +121,12 @@ const NavBarContainer = styled.div<{ mode: boolean }>`
       .checkbox {
         width: 24px;
         height: 24px;
-        background: none;
+        background: ${(props) => (props.mode ? "white" : "#19202d")};
+        opacity: ${(props) => (props.isFulltime ? "" : "0.1")};
         border: none;
         outline: none;
+        border-radius: 3px;
+        cursor: pointer;
       }
 
       h3 {
@@ -146,6 +149,7 @@ const NavBarContainer = styled.div<{ mode: boolean }>`
       background-color: #5964e0;
       border: none;
       border-radius: 5px;
+      cursor: pointer;
     }
   }
 `;
