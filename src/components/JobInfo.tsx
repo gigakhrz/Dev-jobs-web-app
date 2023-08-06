@@ -356,5 +356,6 @@ const InfoContainer = styled.div<{ mode: boolean; bg: string }>`
     }
     @media screen and (min-width: 768px) {
       display: none;
+    }
   }
 `;
