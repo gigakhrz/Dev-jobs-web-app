@@ -57,7 +57,9 @@ const Navbar = ({
             type="checkbox"
             onChange={() => setIsFullTime(!isFulltime)}
           />
-          <h3>Full Time</h3>
+          <h3>
+            Full Time <span>only</span>
+          </h3>
         </div>
 
         <button type="submit">Search</button>
@@ -112,6 +114,10 @@ const NavBarContainer = styled.div<{ mode: boolean; isFulltime: boolean }>`
     gap: 28px;
     align-items: center;
     justify-content: center;
+    @media screen and (min-width: 1024px) {
+      justify-content: space-between;
+      min-width: 300px;
+    }
 
     .fullTime {
       display: flex;
@@ -121,8 +127,8 @@ const NavBarContainer = styled.div<{ mode: boolean; isFulltime: boolean }>`
       width: 110px;
 
       .checkbox {
-        width: 24px;
-        height: 24px;
+        min-width: 24px;
+        min-height: 24px;
         background: ${(props) => (props.mode ? "white" : "#19202d")};
         opacity: ${(props) => (props.isFulltime ? "" : "0.1")};
         border: none;
@@ -137,6 +143,15 @@ const NavBarContainer = styled.div<{ mode: boolean; isFulltime: boolean }>`
         font-weight: 700;
         min-width: 68px;
         display: inline-block;
+        @media screen and (min-width: 1024px) {
+          min-width: 120px;
+        }
+        span {
+          display: none;
+          @media screen and (min-width: 1024px) {
+            display: inline-block;
+          }
+        }
       }
     }
 
