@@ -77,7 +77,9 @@ const NavBarContainer = styled.div<{ mode: boolean; isFulltime: boolean }>`
     display: flex;
     width: 100%;
     height: 80px;
+    gap: 24px;
   }
+
   .wrapper {
     width: 175px;
     display: flex;

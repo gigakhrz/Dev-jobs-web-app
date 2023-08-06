@@ -104,6 +104,11 @@ const SearchContainer = styled.form<{ mode: boolean }>`
     min-width: 711px;
   }
 
+  @media screen and (min-width: 768px) {
+    max-width: 1110px;
+    pad: 0 8px;
+  }
+
   .titleInput {
     width: 60%;
     color: ${(props) => (props.mode ? "white" : "#19202d")};

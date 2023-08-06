@@ -171,6 +171,10 @@ const HomeContainer = styled.div<{ mode: boolean }>`
       row-gap: 65px;
       column-gap: 11px;
     }
+    @media screen and (min-width: 768px) {
+      max-width: 1110px;
+      column-gap: 30px;
+    }
   }
 `;
 
