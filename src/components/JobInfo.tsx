@@ -101,6 +101,10 @@ const InfoContainer = styled.div<{ mode: boolean; bg: string }>`
     margin-top: -40px;
   }
 
+  @media screen and (min-width: 1024px) {
+    max-width: 810px;
+  }
+
   .company {
     width: 100%;
     padding: 50px 0 32px;
@@ -167,6 +171,10 @@ const InfoContainer = styled.div<{ mode: boolean; bg: string }>`
           font-size: 24px;
         }
       }
+
+      @media screen and (min-width: 1024px) {
+        margin-right: 244px;
+      }
     }
 
     a {
@@ -179,6 +187,11 @@ const InfoContainer = styled.div<{ mode: boolean; bg: string }>`
       border-radius: 5px;
       background-color: rgba(89, 100, 224, 0.1);
 
+      @media screen and (min-width: 1024px) {
+        &:hover {
+          opacity: 0.35;
+        }
+      }
       p {
         color: #5964e0;
         text-align: center;
