@@ -30,13 +30,14 @@ const JobInfo = (): JSX.Element => {
 
       <div className="aboutJob">
         <div className="description">
-          <div className="titles">
-            <p>{infoForJob.postedAt + " . " + infoForJob.contract}</p>
-            <h2>{infoForJob.position}</h2>
-            <h5>{infoForJob.location}</h5>
+          <div className="cont">
+            <div className="titles">
+              <p>{infoForJob.postedAt + " . " + infoForJob.contract}</p>
+              <h2>{infoForJob.position}</h2>
+              <h5>{infoForJob.location}</h5>
+            </div>
+            <a href={infoForJob.website}>Apply Now</a>
           </div>
-          <a href={infoForJob.website}>Apply Now</a>
-
           <p>{infoForJob.description}</p>
         </div>
 
@@ -93,6 +94,10 @@ const InfoContainer = styled.div<{ mode: boolean; bg: string }>`
   justify-content: center;
   align-items: center;
 
+  @media screen and (min-width: 768px) {
+    padding: 0 40px;
+    margin-top: -40px;
+  }
   .company {
     width: 100%;
     padding: 50px 0 32px;
@@ -105,6 +110,13 @@ const InfoContainer = styled.div<{ mode: boolean; bg: string }>`
     background: ${(props) => (props.mode ? "#19202D" : "white")};
     text-decoration: none;
     gap: 27px;
+    @media screen and (min-width: 768px) {
+      flex-direction: row;
+      padding: 0;
+      min-height: 140px;
+      justify-content: start;
+      gap: 40px;
+    }
 
     .logo {
       position: absolute;
@@ -117,6 +129,13 @@ const InfoContainer = styled.div<{ mode: boolean; bg: string }>`
       background: ${(props) => props.bg};
       left: 42%;
       top: -25px;
+
+      @media screen and (min-width: 768px) {
+        position: static;
+        width: 140px;
+        height: 140px;
+        border-radius: 0;
+      }
     }
 
     .textCont {
@@ -136,6 +155,14 @@ const InfoContainer = styled.div<{ mode: boolean; bg: string }>`
         color: #6e8098;
         font-size: 16px;
         font-weight: 400;
+      }
+
+      @media screen and (min-width: 768px) {
+        margin-right: 294px;
+
+        h3 {
+          font-size: 24px;
+        }
       }
     }
 
@@ -168,6 +195,9 @@ const InfoContainer = styled.div<{ mode: boolean; bg: string }>`
     background: ${(props) => (props.mode ? "#19202D" : "white")};
     border-radius: 6px;
     padding: 40px 24px;
+    @media screen and (min-width: 768px) {
+      padding: 48px;
+    }
 
     p {
       font-size: 16px;
@@ -189,11 +219,32 @@ const InfoContainer = styled.div<{ mode: boolean; bg: string }>`
       flex-direction: column;
       gap: 32px;
 
+      .cont {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        gap: 54px;
+
+        @media screen and (min-width: 768px) {
+          flex-direction: row;
+          justify-content: space-between;
+        }
+      }
+
       .titles {
         display: flex;
         flex-direction: column;
         justify-content: center;
         gap: 11px;
+        @media screen and (min-width: 768px) {
+          width: 345px;
+
+          h2 {
+            font-size: 28px;
+          }
+        }
 
         h5 {
           font-size: 14px;
@@ -211,7 +262,9 @@ const InfoContainer = styled.div<{ mode: boolean; bg: string }>`
         display: flex;
         align-items: center;
         justify-content: center;
-        margin-top: 22px;
+        @media screen and (min-width: 768px) {
+          width: 141px;
+        }
 
         text-decoration: none;
         font-size: 16px;
@@ -271,7 +324,7 @@ const InfoContainer = styled.div<{ mode: boolean; bg: string }>`
           font-size: 16px;
           font-weight: 700;
           color: #5964e0;
-          margin-top: 10px;
+          margin-top: 3px;
         }
       }
     }
@@ -301,5 +354,7 @@ const InfoContainer = styled.div<{ mode: boolean; bg: string }>`
       font-weight: 700;
       color: white;
     }
+    @media screen and (min-width: 768px) {
+      display: none;
   }
 `;
