@@ -62,7 +62,9 @@ const Navbar = ({
           </h3>
         </div>
 
-        <button type="submit">Search</button>
+        <button className="searchButton" type="submit">
+          Search
+        </button>
       </div>
     </NavBarContainer>
   );
@@ -80,6 +82,11 @@ const NavBarContainer = styled.div<{ mode: boolean; isFulltime: boolean }>`
     width: 100%;
     height: 80px;
     gap: 24px;
+  }
+  @media screen and (min-width: 1024px) {
+    .searchButton:hover {
+      background: #939bf4;
+    }
   }
 
   .wrapper {

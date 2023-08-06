@@ -36,7 +36,9 @@ const JobInfo = (): JSX.Element => {
               <h2>{infoForJob.position}</h2>
               <h5>{infoForJob.location}</h5>
             </div>
-            <a href={infoForJob.website}>Apply Now</a>
+            <a className="apply" href={infoForJob.website}>
+              Apply Now
+            </a>
           </div>
           <p>{infoForJob.description}</p>
         </div>
@@ -98,6 +100,7 @@ const InfoContainer = styled.div<{ mode: boolean; bg: string }>`
     padding: 0 40px;
     margin-top: -40px;
   }
+
   .company {
     width: 100%;
     padding: 50px 0 32px;
@@ -264,6 +267,9 @@ const InfoContainer = styled.div<{ mode: boolean; bg: string }>`
         justify-content: center;
         @media screen and (min-width: 768px) {
           width: 141px;
+        }
+        &:hover {
+          background-color: #939bf4;
         }
 
         text-decoration: none;

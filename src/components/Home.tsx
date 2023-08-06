@@ -136,6 +136,11 @@ const HomeContainer = styled.div<{ mode: boolean }>`
   @media screen and (min-width: 768px) {
     padding: 0 39px 61px;
   }
+  @media screen and (min-width: 1024px) {
+    .more:hover {
+      background: #939bf4;
+    }
+  }
 
   .more {
     border: none;
@@ -147,6 +152,9 @@ const HomeContainer = styled.div<{ mode: boolean }>`
     font-weight: 700;
     color: white;
     cursor: pointer;
+    @media screen and (min-width: 1024px) {
+      width: 141px;
+    }
   }
 
   .info {
