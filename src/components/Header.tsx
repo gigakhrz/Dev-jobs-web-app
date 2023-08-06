@@ -56,6 +56,10 @@ const HeaderCont = styled.header<{ bagckgorundImage: string }>`
     background-color: transparent;
     min-height: 160px;
   }
+  @media screen and (min-width: 768px) {
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
 
   img {
     cursor: pointer;
