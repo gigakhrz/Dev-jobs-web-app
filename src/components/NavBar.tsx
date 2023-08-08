@@ -24,7 +24,7 @@ const Navbar = ({
   const mode = useSelector((store: RootState) => store.lightMode.dark);
 
   return (
-    <NavBarContainer mode={mode} isFulltime={isFulltime}>
+    <NavBarContainer mode={mode} isfulltime={isFulltime}>
       <div className="wrapper">
         <img src={searchIcon} alt="" />
         <input
@@ -72,7 +72,7 @@ const Navbar = ({
 
 export default Navbar;
 
-const NavBarContainer = styled.div<{ mode: boolean; isFulltime: boolean }>`
+const NavBarContainer = styled.div<{ mode: boolean; isfulltime: boolean }>`
   display: none;
   align-items: center;
   justify-content: space-around;
@@ -137,7 +137,7 @@ const NavBarContainer = styled.div<{ mode: boolean; isFulltime: boolean }>`
         min-width: 24px;
         min-height: 24px;
         background: ${(props) => (props.mode ? "white" : "#19202d")};
-        opacity: ${(props) => (props.isFulltime ? "" : "0.1")};
+        opacity: ${(props) => (props.isfulltime ? "" : "0.1")};
         border: none;
         outline: none;
         border-radius: 3px;

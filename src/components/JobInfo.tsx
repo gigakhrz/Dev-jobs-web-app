@@ -1,11 +1,17 @@
 import { useSelector } from "react-redux";
 import { styled } from "styled-components";
 import { RootState } from "../features/store";
+import DevJob from "../../type";
 
 const JobInfo = (): JSX.Element => {
-  const jobId = useSelector((store: RootState) => store.moreInfo.jobId);
-  const jobs = useSelector((store: RootState) => store.devJob.jobs);
-  const job = jobs.filter((job) => job.id === jobId);
+  const storedArray: DevJob[] = JSON.parse(
+    localStorage.getItem("myArray") || "[]"
+  );
+
+  // job id which saved in localstorage
+  const savedId = parseInt(localStorage.getItem("clickedJobId") || "0");
+
+  const job = storedArray.filter((job) => job.id === savedId);
   const mode = useSelector((store: RootState) => store.lightMode.dark);
 
   //apply job info

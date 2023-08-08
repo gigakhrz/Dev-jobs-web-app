@@ -19,7 +19,7 @@ const size = 6;
 
 function App() {
   // page state
-  const currentPage = useSelector((store: RootState) => store.page.page); // Rename to currentPage
+  const currentPage = useSelector((store: RootState) => store.page.page);
 
   const dispatch = useDispatch();
 
@@ -48,6 +48,7 @@ function App() {
         `http://localhost:3001/getAll`
       );
       dispatch(setAllJobs(response.data));
+      localStorage.setItem("myArray", JSON.stringify(response.data));
     } catch (error) {
       console.log("can't fetch data");
     }

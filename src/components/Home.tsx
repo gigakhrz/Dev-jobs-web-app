@@ -35,6 +35,10 @@ const Home = (): JSX.Element => {
     [dispatch]
   );
 
+  const handleClickJob = (jobId: number) => {
+    localStorage.setItem("clickedJobId", jobId.toString());
+  };
+
   //to filter jobs
   function filterJobs(title: string, fullTime: boolean, location: string) {
     let filteredJobs = allJobs;
@@ -84,7 +88,7 @@ const Home = (): JSX.Element => {
           <Link className="info" to="/info" key={index}>
             <Job
               onClick={() => {
-                getJobId(job.id);
+                handleClickJob(job.id);
               }}
               key={index}
               bg={job.logoBackground}
