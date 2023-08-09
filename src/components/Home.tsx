@@ -3,8 +3,7 @@ import { RootState } from "../features/store";
 import { useSelector, useDispatch } from "react-redux";
 import Search from "./Search";
 import { setPage } from "../features/pageSlice";
-import { setInfo } from "../features/moreInfo";
-import { useCallback, useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 
 const Home = (): JSX.Element => {
