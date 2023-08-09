@@ -17,7 +17,7 @@ const Header = (): JSX.Element => {
   };
 
   const handleGoToHomePage = (): void => {
-    window.location.href = "http://https://dev-jobs-web-app-w6rq.vercel.app/";
+    window.location.href = "https://dev-jobs-web-app-w6rq.vercel.app/";
   };
 
   return (
