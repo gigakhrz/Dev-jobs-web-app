@@ -27,14 +27,6 @@ const Home = (): JSX.Element => {
     dispatch(setPage(1));
   };
 
-  // Memoize the getJobId function with useCallback to prevent re-rendering and state reset
-  const getJobId = useCallback(
-    (x: number): void => {
-      dispatch(setInfo(x));
-    },
-    [dispatch]
-  );
-
   const handleClickJob = (jobId: number) => {
     localStorage.setItem("clickedJobId", jobId.toString());
   };

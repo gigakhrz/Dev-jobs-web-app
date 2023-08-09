@@ -14,7 +14,7 @@ import { setFilter } from "./features/mobileFilterSlice";
 import { setAllJobs } from "./features/allJobSlice";
 
 //Api address
-export const API_BASE_URL = `http://dev-jobs-web-app-api-production.up.railway.app/jobs/`;
+export const API_BASE_URL = `https://dev-jobs-web-app-api-production.up.railway.app/jobs/`;
 const size = 6;
 
 function App() {
@@ -45,7 +45,7 @@ function App() {
     //to fetch all Devjob array
     try {
       const response = await axios.get<DevJob[]>(
-        `http://dev-jobs-web-app-api-production.up.railway.app/getAll`
+        `https://dev-jobs-web-app-api-production.up.railway.app/getAll`
       );
       dispatch(setAllJobs(response.data));
       localStorage.setItem("myArray", JSON.stringify(response.data));
