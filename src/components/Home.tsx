@@ -36,7 +36,7 @@ const Home = (): JSX.Element => {
 
     if (title) {
       filteredJobs = filteredJobs.filter((job) =>
-        job.position.toLowerCase().includes(title)
+        job.position.toLowerCase().includes(title.toLocaleLowerCase())
       );
     }
 
@@ -46,7 +46,7 @@ const Home = (): JSX.Element => {
 
     if (location) {
       filteredJobs = filteredJobs.filter((job) =>
-        job.location.toLowerCase().includes(location)
+        job.location.toLowerCase().includes(location.toLocaleLowerCase())
       );
     }
 
