@@ -14,8 +14,8 @@ interface Searchprops {
 
 const Search = ({
   setTitle,
-  setFullTime,
   setLocation,
+  setFullTime,
 }: Searchprops): JSX.Element => {
   // lightmode state
   const mode = useSelector((store: RootState) => store.lightMode.dark);
