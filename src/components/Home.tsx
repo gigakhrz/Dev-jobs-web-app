@@ -14,7 +14,7 @@ const Home = (): JSX.Element => {
 
   // lightmode state
   const mode = useSelector((store: RootState) => store.lightMode.dark);
-  const jobs = useSelector((store: RootState) => store.devJob.jobs);
+
   //all jobs
   const allJobs = useSelector((store: RootState) => store.allDevjob.allJobs);
   // pageSlice
@@ -68,14 +68,7 @@ const Home = (): JSX.Element => {
         setFullTime={setFullTime}
       />
       <div className="cardWrapper">
-        {(title !== ""
-          ? visibleFilteredJobs
-          : location !== ""
-          ? visibleFilteredJobs
-          : fullTime !== false
-          ? visibleFilteredJobs
-          : jobs
-        ).map((job, index) => (
+        {visibleFilteredJobs.map((job, index) => (
           <Link className="info" to="/info" key={index}>
             <Job
               onClick={() => {
